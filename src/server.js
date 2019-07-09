@@ -14,5 +14,7 @@ server.use(express.urlencoded({ extended:true }))
 
 server.use(require('./routes'));
 
-server.listen(process.env.PORT || 3333);
+porta = process.env.PORT || 3333;
+
+server.listen(porta);
 
