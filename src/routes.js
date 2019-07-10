@@ -41,7 +41,7 @@ routes.post('/pessoa', (req, res, next) => {
     const { id } = req.params;
     knex('ALUNO4M02.tb_pessoa')
     .select('*',knex.raw('array(select f.id_portfolio from "ALUNO4M02".tb_portfolio f where f.id_aluno = id_pessoa) as portfolios'))
-    .where('id_pessoa', id)
+    .where('email', id)
     .then((dados) => {
       if(!dados) return res.send(("Nada foi encontrado"));
       res.send(dados);
