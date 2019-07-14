@@ -401,19 +401,19 @@ routes.post('/pessoa', (req, res, next) => {
   });
   
   routes.get('/turmas_aluno/:id1', (req, res, next) => {
-    const {id1,id2} = req.params;
+    const {id1} = req.params;
     knex('ALUNO4M02.tb_turma_aluno')
-    .where({id_tarefa:id1,cod_turma:id2})
+    .where({id_aluno:id1})
     .then((dados) => {
       if(!dados) return res.send(("Nada foi encontrado"));
       res.send(dados);
   }, next);
   });
   
-  routes.put('/turmas_aluno/update/:id', (req, res, next) => {
+  routes.put('/turmas_aluno/update/:id1/id2', (req, res, next) => {
     const {id1,id2} = req.params;
     knex('ALUNO4M02.tb_turma_aluno')
-    .where({id_tarefa:id1,cod_turma:id2})
+    .where({id_aluno:id1,cod_turma:id2})
     .update(req.body)
     .then((dados) => {
       if(!dados) return res.send('Nada foi encontrado');
@@ -424,7 +424,7 @@ routes.post('/pessoa', (req, res, next) => {
   routes.delete('/turmas_aluno/delete/:id1/:id2', (req, res, next) => {
     const {id1,id2} = req.params;
     knex('ALUNO4M02.tb_turma_aluno')
-    .where({cod_turma:id2,id_aluno:id1})
+    .where({id_aluno:id1,cod_turma:id2})
     .delete()
     .then((dados) => {
       if(!dados) return res.send ('Nada foi encontrado');
