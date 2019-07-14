@@ -354,7 +354,7 @@ routes.post('/pessoa', (req, res, next) => {
   });
   
   routes.get('/tarefas_turma/:id1', (req, res, next) => {
-    const { id2 } = req.params;
+    const { id1 } = req.params;
     knex('ALUNO4M02.tb_tarefa_turma')
     .where({cod_turma:id1})
     .then((dados) => {
