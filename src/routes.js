@@ -353,10 +353,10 @@ routes.post('/pessoa', (req, res, next) => {
   }, next);
   });
   
-  routes.get('/tarefas_turma/:id1/:id2', (req, res, next) => {
-    const {id1, id2} = req.params;
+  routes.get('/tarefas_turma/:id1', (req, res, next) => {
+    const { id2 } = req.params;
     knex('ALUNO4M02.tb_tarefa_turma')
-    .where({id_tarefa:id1,cod_turma:id2})
+    .where({cod_turma:id1})
     .then((dados) => {
       if(!dados) return res.send(("Nada foi encontrado"));
       res.send(dados);
