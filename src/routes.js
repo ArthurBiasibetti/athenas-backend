@@ -90,7 +90,7 @@ routes.post('/pessoa', (req, res, next) => {
   routes.get('/portfolios/:id1/:id2', (req, res, next) => {
     const {id1, id2} = req.params;
     knex('ALUNO4M02.tb_portfolio')
-    .where({id_portfolio:id1, id_aluno:id2})
+    .where({cod_turma:id1, id_aluno:id2})
     .then((dados) => {
       if(!dados) return res.send(("Nada foi encontrado"));
       res.send(dados);
