@@ -74,8 +74,8 @@ routes.post('/pessoa', (req, res, next) => {
   
   routes.post('/portfolio', (req, res, next) => {
     knex('ALUNO4M02.tb_portfolio')
-    .insert(req.body)
-    then((dados) =>{
+    .insert({cod_turma:req.body.cod_turma, id_aluno: id_aluno})
+    .then((dados) =>{
       res.send("Inserido com sucesso");
   }, next);
   });
