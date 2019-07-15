@@ -363,7 +363,7 @@ routes.post('/pessoa', (req, res, next) => {
   }, next);
   });
 
-  routes.get('/tarefas_turma/:id1', (req, res, next) => {
+  routes.get('/tarefas_turmas/:id1', (req, res, next) => {
     const { id1 } = req.params;
     knex('ALUNO4M02.tb_tarefa_turma')
     .where({id_turma:id1})
