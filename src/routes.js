@@ -362,6 +362,16 @@ routes.post('/pessoa', (req, res, next) => {
       res.send(dados);
   }, next);
   });
+
+  routes.get('/tarefas_turma/:id1', (req, res, next) => {
+    const { id1 } = req.params;
+    knex('ALUNO4M02.tb_tarefa_turma')
+    .where({id_turma:id1})
+    .then((dados) => {
+      if(!dados) return res.send(("Nada foi encontrado"));
+      res.send(dados);
+  }, next);
+  });
   
   routes.put('/tarefas_turma/update/:id1/:id2', (req, res, next) => {
     const {id1, id2} = req.params;
