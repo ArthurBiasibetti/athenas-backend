@@ -366,7 +366,7 @@ routes.post('/pessoa', (req, res, next) => {
   routes.get('/tarefas_turmas/:id1', (req, res, next) => {
     const { id1 } = req.params;
     knex('ALUNO4M02.tb_tarefa_turma')
-    .where({id_turma:id1})
+    .where({cod_turma:id1})
     .then((dados) => {
       if(!dados) return res.send(("Nada foi encontrado"));
       res.send(dados);
