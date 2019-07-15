@@ -72,11 +72,11 @@ routes.post('/pessoa', (req, res, next) => {
   
   // Portfolio
   
-  routes.post('/portfolio', (req, res, next) => {
+ routes.post('/portfolio', (req, res, next) => {
     knex('ALUNO4M02.tb_portfolio')
-    .insert({cod_turma:req.body.cod_turma, id_aluno: id_aluno})
-    .then((dados) =>{
-      res.send("Inserido com sucesso");
+    .insert(req.body)
+    .then((dados) => {
+      res.send(dados);
   }, next);
   });
   
