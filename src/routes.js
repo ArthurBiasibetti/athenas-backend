@@ -346,7 +346,7 @@ routes.post('/pessoa', (req, res, next) => {
   //pegar Tarefas do Aluno
   routes.get('/pegar_tarefas/:id', (req, res, next) => {
     const { id } = req.params;
-    knex.raw(`	select t.cod_turma, p.nome as nome_professor, t.id_diciplina, to_char(tft.data_entrega, 'DD/MM/YYYY') as data_entrega, to_char(tft.data_inicio, 'DD/MM/YYYY') as data_inicio, tf.* from "ALUNO4M02".tb_turma t inner join "ALUNO4M02".tb_turma_aluno ta on ta.cod_turma = t.cod_turma inner join "ALUNO4M02".tb_tarefa_turma tft on ta.cod_turma = tft.cod_turma inner join "ALUNO4M02".tb_tarefa tf on tf.id_tarefa = tft.id_tarefa inner join "ALUNO4M02".tb_pessoa p on t.id_professor = p.id_pessoa  where ta.id_aluno = ${id}`)
+    knex.raw(`select t.cod_turma, p.nome as nome_professor, d.nome_diciplina, to_char(tft.data_entrega, 'DD/MM/YYYY') as data_entrega, to_char(tft.data_inicio, 'DD/MM/YYYY') as data_inicio, tf.* from "ALUNO4M02".tb_turma t inner join "ALUNO4M02".tb_turma_aluno ta on ta.cod_turma = t.cod_turma inner join "ALUNO4M02".tb_tarefa_turma tft on ta.cod_turma = tft.cod_turma inner join "ALUNO4M02".tb_tarefa tf on tf.id_tarefa = tft.id_tarefa inner join "ALUNO4M02".tb_pessoa p on t.id_professor = p.id_pessoa inner join "ALUNO4M02".tb_diciplina d on d.id_diciplina = t.id_diciplina where ta.id_aluno = ${id}`)
     .then((dados) => {
       res.send(dados.rows);
   }, next);
