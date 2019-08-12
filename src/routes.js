@@ -277,7 +277,7 @@ routes.post('/pessoa', (req, res, next) => {
   
   // Tarefa
   
-  routes.post('/tarefa', (req, res, next) => {
+  routes.post('/tarefa/:cod_turma', (req, res, next) => {
     knex('ALUNO4M02.tb_tarefa')
     .insert({
       peso_nota: req.body.peso_nota,
@@ -286,10 +286,11 @@ routes.post('/pessoa', (req, res, next) => {
       nome_tarefa: req.body.nome_tarefa
     }).returning('id_tarefa')
     .then((dados) =>{
+      
       //adicionando tarefa à turma correspondente
       knex('ALUNO4M02.tb_tarefa_turma')
       .insert({
-        cod_turma: req.body.cod_turma,
+        cod_turma: req.params.cod_turma,
         id_tarefa: dados[0],
         data_entrega: req.body.data_entrega
       })
@@ -339,6 +340,15 @@ routes.post('/pessoa', (req, res, next) => {
     .then((dados) => {
       if(!dados) return res.send ('Nada foi encontrado');
       res.send('dados excluidos');
+  }, next);
+  });
+
+  //pegar Tarefas do Aluno
+  routes.get('/pegar_tarefas/:id', (req, res, next) => {
+    const { id } = req.params;
+    knex.raw(`select t.cod_turma, t.id_professor, t.id_diciplina, tft.data_entrega, tft.data_inicio, tf.* from "ALUNO4M02".tb_turma t inner join "ALUNO4M02".tb_turma_aluno ta on ta.cod_turma = t.cod_turma inner join "ALUNO4M02".tb_tarefa_turma tft on ta.cod_turma = tft.cod_turma inner join "ALUNO4M02".tb_tarefa tf on tf.id_tarefa = tft.id_tarefa where ta.id_aluno = ${id}`)
+    .then((dados) => {
+      res.send(dados.rows);
   }, next);
   });
   
