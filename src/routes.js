@@ -177,12 +177,13 @@ routes.post('/pessoa', (req, res, next) => {
   //Turma
   routes.post('/turma', (req, res, next) => {
     knex('ALUNO4M02.tb_turma')
-    .insert({cod_turma: crypto.randomBytes(3).toString('hex'),
+      .insert({
+        cod_turma: crypto.randomBytes(3).toString('hex'),
         id_professor:req.body.id_professor,
-        id_diciplina:req.body.nome_diciplina,
+        nome_diciplina:req.body.nome_diciplina,
         nome_turma:req.body.nome_turma})
-    .then((dados) =>{
-      res.send("Inserido com sucesso");
+      .then((dados) =>{
+        res.send("Inserido com sucesso");
   }, next);
   });
   
