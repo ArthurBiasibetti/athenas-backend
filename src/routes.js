@@ -198,7 +198,7 @@ routes.post('/pessoa', (req, res, next) => {
     knex('ALUNO4M02.tb_turma')
     .where('cod_turma',id)
     .then((dados) => {
-      if(!dados) return res.send(("Nada foi encontrado"));
+      if(!dados){ return res.send(("Nada foi encontrado"))};
       res.send(dados);
   }, next);
   });
@@ -242,10 +242,10 @@ routes.post('/pessoa', (req, res, next) => {
   }, next);
   });
   
-  routes.get('/diciplinas/:id', (req, res, next) => {
-    const {id} = req.params;
+  routes.get('/diciplinas/:nome_diciplina', (req, res, next) => {
+    const {nome_diciplina} = req.params;
     knex('ALUNO4M02.tb_diciplina')
-    .where('id_diciplina',id)
+    .where('nome_diciplina',nome_diciplina)
     .then((dados) => {
       if(!dados) return res.send(("Nada foi encontrado"));
       res.send(dados);
