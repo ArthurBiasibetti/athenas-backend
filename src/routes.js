@@ -206,8 +206,7 @@ routes.post('/pessoa', (req, res, next) => {
 
   routes.get('/turmasProfessor/:id_professor', (req, res, next) => {
     const {id_professor} = req.params;
-    knex('ALUNO4M02.tb_turma')
-    .where('id_professor',id_professor)
+    knex.raw('select a.*, (select count(b.id_aluno) from "ALUNO4M02".tb_turma_aluno b where a.cod_turma = b.cod_turma) as nu_aluno from "ALUNO4M02".tb_turma a')
     .then((dados) => {
       if(!dados){ return res.send(("Nada foi encontrado"))};
       res.send(dados);
