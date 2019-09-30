@@ -439,6 +439,16 @@ routes.post('/pessoa', (req, res, next) => {
       res.send(dados);
   }, next);
   });
+
+  routes.get('/turmas_alunoProfessor/:codTurma', (req, res, next) => {
+    const {codTurma} = req.params;
+    knex('ALUNO4M02.tb_turma_aluno')
+    .where({cod_turma:CodTurma})
+    .then((dados) => {
+      if(!dados) return res.send(("Nada foi encontrado"));
+      res.send(dados);
+  }, next);
+  });
   
   routes.put('/turmas_aluno/update/:id1/id2', (req, res, next) => {
     const {id1,id2} = req.params;
