@@ -206,7 +206,7 @@ routes.post('/pessoa', (req, res, next) => {
 
   routes.get('/turmasProfessor/:id_professor', (req, res, next) => {
     const {id_professor} = req.params;
-    knex.raw('select a.*, (select count(b.id_aluno) from "ALUNO4M02".tb_turma_aluno b where a.cod_turma = b.cod_turma) as nu_aluno (select count(c.id_tarefa) from "ALUNO4M02".tb_tarefa_turma c where c.cod_turma = a.cod_turma) as nu_tarefas from "ALUNO4M02".tb_turma a')
+    knex.raw('select a.*, (select count(b.id_aluno) from "ALUNO4M02".tb_turma_aluno b where a.cod_turma = b.cod_turma) as nu_aluno, (select count(c.id_tarefa) from "ALUNO4M02".tb_tarefa_turma c where c.cod_turma = a.cod_turma) as nu_tarefas from "ALUNO4M02".tb_turma a')
     .then((dados) => {
       if(!dados){ return res.send(("Nada foi encontrado"))};
       res.send(dados.rows);
