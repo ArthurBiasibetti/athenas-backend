@@ -364,7 +364,7 @@ routes.post('/pessoa', (req, res, next) => {
    //pegar Tarefas do Professor
    routes.get('/tarefas_professor/:id', (req, res, next) => {
     const { id } = req.params;
-    knex.raw(`select * from "ALUNO4M02".view_pegar_tarefas_professor where id_aluno = ${id}`)
+    knex.raw(`select * from "ALUNO4M02".view_pegar_tarefas_professor where id_professor = ${id}`)
     .then((dados) => {
       res.send(dados.rows);
   }, next);
