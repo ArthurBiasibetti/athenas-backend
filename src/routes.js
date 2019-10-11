@@ -295,8 +295,7 @@ routes.post('/pessoa', (req, res, next) => {
       descricao: req.body.descricao,
       nome_tarefa: req.body.nome_tarefa
     }).returning('id_tarefa')
-    .then((dados) =>{
-      
+    .then((dados) =>{ 
       //adicionando tarefa à turma correspondente
       knex('ALUNO4M02.tb_tarefa_turma')
       .insert({
@@ -308,8 +307,6 @@ routes.post('/pessoa', (req, res, next) => {
       });
       //fim
       //adicionar aviso de tarefa adicionada
-      
-
       res.send('tarefa adicionada');      
   }, next);
   });
@@ -357,6 +354,17 @@ routes.post('/pessoa', (req, res, next) => {
   routes.get('/pegar_tarefas/:id', (req, res, next) => {
     const { id } = req.params;
     knex.raw(`select * from "ALUNO4M02".view_pegar_tarefas where id_aluno = ${id}`)
+    .then((dados) => {
+      res.send(dados.rows);
+  }, next);
+  });
+  
+  //Fim Tarefa
+
+   //pegar Tarefas do Professor
+   routes.get('/tarefas_professor/:id', (req, res, next) => {
+    const { id } = req.params;
+    knex.raw(`select * from "ALUNO4M02".view_pegar_tarefas_professor where id_aluno = ${id}`)
     .then((dados) => {
       res.send(dados.rows);
   }, next);
