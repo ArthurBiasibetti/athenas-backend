@@ -418,16 +418,16 @@ routes.post('/pessoa', (req, res, next) => {
   // Turma_Aluno
   routes.post('/turma_aluno', (req, res, next) => {
     knex('ALUNO4M02.tb_turma_aluno')
-    .insert(req.body).then((dados) =>{
+    .insert(req.body).returning('id_aluno','cod_turma').then((dados) =>{
       res.send(dados.rows)
-      //   knex('ALUNO4M02.tb_portfolio')
-      //   .insert({
-      //     id_aluno: dados[1],
-      //     cod_turma: dados[0]
-      //   })
-      //   .then((dados) => {
-      //     res.send(dados);
-      // });
+        knex('ALUNO4M02.tb_portfolio')
+        .insert({
+          id_aluno: dados[1],
+          cod_turma: dados[0]
+        })
+        .then((dados) => {
+          res.send(dados);
+      });
       
   }, next);
   });
