@@ -421,7 +421,7 @@ routes.post('/pessoa', (req, res, next) => {
     .insert({
       cod_turma: req.body.cod_turma,
       id_aluno: req.body.id_aluno
-    }).returning('id_aluno','cod_turma').then((dados) =>{
+    }).then((dados) =>{
       res.send(dados.rows)
         knex('ALUNO4M02.tb_portfolio')
         .insert({
@@ -429,7 +429,6 @@ routes.post('/pessoa', (req, res, next) => {
           cod_turma: dados[0]
         })
         .then((dados) => {
-          res.send(dados);
       });
       
   }, next);
