@@ -72,14 +72,6 @@ routes.post('/pessoa', (req, res, next) => {
   
   // Portfolio
   
- routes.post('/portfolio', (req, res, next) => {
-    knex('ALUNO4M02.tb_portfolio')
-    .insert(req.body)
-    .then((dados) => {
-      res.send(dados);
-  }, next);
-  });
-  
   routes.get('/portfolios', (req, res, next) => {
     knex('ALUNO4M02.tb_portfolio')
     .then((dados) => {
@@ -427,6 +419,13 @@ routes.post('/pessoa', (req, res, next) => {
   routes.post('/turma_aluno', (req, res, next) => {
     knex('ALUNO4M02.tb_turma_aluno')
     .insert(req.body).then((dados) =>{
+        knex('ALUNO4M02.tb_portfolio')
+        .insert({
+          id_aluno: dados.id_aluno,
+          cod_turma: dados.cod_turma
+        })
+        .then((dados) => {
+      });
       res.send("Inserido com sucesso");
   }, next);
   });
