@@ -426,7 +426,7 @@ routes.post('/pessoa', (req, res, next) => {
         })
         .then((dados) => {
       });
-      res.send("Inserido com sucesso" , dados);
+      res.send(dados);
   }, next);
   });
   
