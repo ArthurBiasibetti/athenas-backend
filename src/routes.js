@@ -119,7 +119,7 @@ routes.post('/pessoa', (req, res, next) => {
       id_portfolio: req.body.id_portfolio,
       id_tarefa: req.body.id_tarefa,
       caminho: req.file.key,
-      nome: req.file.originalname,})
+      })
     .then((dados) =>{
       res.send(dados);
   }, next);
