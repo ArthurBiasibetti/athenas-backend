@@ -121,7 +121,7 @@ routes.post('/pessoa', (req, res, next) => {
       caminho: req.file.key,
       nome: req.file.originalname,})
     .then((dados) =>{
-      res.send("Inserido com sucesso");
+      res.send(dados);
   }, next);
   });
   
