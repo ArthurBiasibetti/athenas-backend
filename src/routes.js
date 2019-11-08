@@ -104,7 +104,7 @@ routes.post('/pessoa', (req, res, next) => {
     const { id } = req.params;
     knex('ALUNO4M02.tb_portfolio')
     .where('id_portfolio', id)
-    .delete(req.doby).then((dados) => {
+    .delete(req.body).then((dados) => {
       if(!dados) return res.send ('Nada foi encontrado');
       res.send('dados excluidos');
   }, next);
@@ -113,10 +113,11 @@ routes.post('/pessoa', (req, res, next) => {
   //Fim portfolio
   
   // Arquivo
-    routes.post('/portfolio/:id_portfolio/files', multer(multerConfig).single('file'),(req, res, next) => {
+    routes.post('/arquivo', multer(multerConfig).single('file'),(req, res, next) => {
     knex('ALUNO4M02.tb_arquivo')
     .insert({
-      id_portfolio: req.params.id_portfolio,
+      id_portfolio: req.body.id_portfolio,
+      id_tarefa: req.body.id_tarefa,
       caminho: req.file.key,
       nome: req.file.originalname,})
     .then((dados) =>{
@@ -124,7 +125,7 @@ routes.post('/pessoa', (req, res, next) => {
   }, next);
   });
   
-  routes.get('/arquivo', (req, res, next) => {
+  routes.get('/arquivos', (req, res, next) => {
     knex('ALUNO4M02.tb_arquivo')
     .then((dados) => {
       res.send(dados);
