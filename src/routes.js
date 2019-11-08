@@ -129,7 +129,7 @@ routes.post('/pessoa', (req, res, next) => {
     knex('ALUNO4M02.tb_arquivo')
     .then((dados) => {
       res.send(dados);
-  }, next).catch(err => res.send(err));
+  }, next);
   });
   
   routes.get('/arquivos/:id', (req, res, next) => {
