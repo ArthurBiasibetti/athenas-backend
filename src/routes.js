@@ -20,7 +20,7 @@ var knex = require('knex')({
 
 // Rotas REST
 // Pessoas
-routes.post('/pessoa', (req, res, next) => {
+  routes.post('/pessoa', (req, res, next) => { 
     knex('ALUNO4M02.tb_pessoa')
     .insert({nome: req.body.nome,sobrenome:req.body.sobrenome, senha:crypto.createHash('MD5').update(req.body.senha).digest('hex'), email:req.body.email })
     .then((dados) =>{
@@ -113,11 +113,11 @@ routes.post('/pessoa', (req, res, next) => {
   //Fim portfolio
   
   // Arquivo
-    routes.post('/arquivo', multer(multerConfig).single('file'),(req, res, next) => {
+    routes.post('/arquivo/:id_tarefa/:id_portfolio', multer(multerConfig).single('file'),(req, res, next) => {
     knex('ALUNO4M02.tb_arquivo')
     .insert({
-      id_portfolio: req.body.id_portfolio,
-      id_tarefa: req.body.id_tarefa,
+      id_portfolio: req.params.id_portfolio,
+      id_tarefa: req.params.id_tarefa,
       caminho: req.file.key,
       })
     .then((dados) =>{
